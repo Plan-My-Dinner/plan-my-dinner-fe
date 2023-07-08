@@ -1,13 +1,18 @@
 import React, { FC, useState, MouseEventHandler, useCallback } from 'react'
 import './RandomMealForm.css'
 import { log } from 'console';
+import RandomMeals from '../RandomMeals/RandomMeals';
+import { RandomMealProps } from '../Homepage/Homepage';
 
 interface RandomMealFormProps {
     setNumberOfMeals: (numberOfMeals: number) => void;
     numberOfMeals: number
+    randomMeals: RandomMealProps[]
 }
 
-const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMeals }) => {
+const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMeals, randomMeals }) => {
+
+    console.log('R', randomMeals)
 
     const [open, setOpen] = useState<boolean>(false)
 
@@ -34,6 +39,7 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
                     </li>
                 </ul>
             ) : null}
+            <RandomMeals randomMeals={randomMeals}/>
         </div>
         )
 }
