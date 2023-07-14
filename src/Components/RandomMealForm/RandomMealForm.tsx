@@ -24,7 +24,7 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
         console.log('19', e.target.value)
         setNumberOfMeals(parseInt(e.target.value));
         setOpen(false);
-    }, [numberOfMeals]);
+    }, [setNumberOfMeals]);
 
     return (
         <div className='drop-down'>

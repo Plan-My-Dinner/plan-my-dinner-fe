@@ -8,14 +8,14 @@ type RandomMealComp = {
 }
 
 const RandomMeals: React.FC<RandomMealComp>= ({ randomMeals }) => {
-
+// console.log('random meals', randomMeals)
     const randomMealCards = randomMeals.map(randomMeal => {
         return (
             <RecipeCard
             strMeal={randomMeal.strMeal}
             strMealThumb={randomMeal.strMealThumb}
             idMeal={randomMeal.idMeal}
-            key={Date.now()}
+            key={randomMeal.idMeal}
             />
         )
 })
