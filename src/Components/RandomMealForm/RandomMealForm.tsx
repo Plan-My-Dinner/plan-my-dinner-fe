@@ -14,34 +14,36 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
 
     console.log('R', randomMeals)
 
-    const [open, setOpen] = useState<boolean>(false)
+    // const [open, setOpen] = useState<boolean>(false)
 
-    const handleOpen = () => {
-        setOpen(!open)
+    const handleOpen = (e: any) => {
+        console.log(parseInt(e.target.value))
+        setNumberOfMeals(numberOfMeals)
+        //setOpen(!open)
     }
+
+    //create array called lockedRecipes to push in recipe id's of the locked recipes
+    //if locked recipes has.length, we will subtract lockedRecipes.length from randomRecipes.length
 
     const handleNumberCapture = useCallback((e: any) => {
         console.log('19', e.target.value)
-        setNumberOfMeals(parseInt(e.target.value));
-        setOpen(false);
+        setNumberOfMeals(parseInt(e.target.value))
+        // const selectedValue = parseInt(e.target.value)
+        // setNumberOfMeals(selectedValue);
+        //setOpen(false);
     }, [setNumberOfMeals]);
 
     return (
         <div className='drop-down'>
-            <button onClick={handleOpen}>No. of Meals</button>
-            {open ? (
-                <ul className='meal-numbers'>
-                    <li className='meal-5'>
-                        <button onClick={handleNumberCapture} value={5}>5</button>
-                    </li>
-                    <li className='meal-7'>
-                        <button onClick={handleNumberCapture} value={7}>7</button>
-                    </li>
-                </ul>
-            ) : null}
+            <button className='get-recipes-button' onClick={handleOpen}>Get Recipes</button>
+            <p className='no-of-meals'>No. of meals</p>
+            <select className='meal-numbers' onChange={handleNumberCapture} value={numberOfMeals}>
+                <option value={5}>5</option>
+                <option value={7}>7</option>
+            </select>
             <RandomMeals randomMeals={randomMeals}/>
         </div>
-        )
+    )
 }
 
 export default RandomMealForm;

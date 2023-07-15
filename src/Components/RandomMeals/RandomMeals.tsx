@@ -5,9 +5,11 @@ import RecipeCard from '../RecipeCard/RecipeCard'
 
 type RandomMealComp = {
     randomMeals: RandomMealProps[]
+    locked: RandomMealProps[]
+    setLocked: RandomMealProps[]
 }
 
-const RandomMeals: React.FC<RandomMealComp>= ({ randomMeals }) => {
+const RandomMeals: React.FC<RandomMealComp>= ({ randomMeals, locked, setLocked }) => {
 // console.log('random meals', randomMeals)
     const randomMealCards = randomMeals.map(randomMeal => {
         return (
