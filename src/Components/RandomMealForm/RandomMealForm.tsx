@@ -1,36 +1,29 @@
-import React, { FC, useState, MouseEventHandler, useCallback } from 'react'
-import './RandomMealForm.css'
+import React, { FC, useState, MouseEventHandler, useCallback } from 'react';
+import './RandomMealForm.css';
 import { log } from 'console';
 import RandomMeals from '../RandomMeals/RandomMeals';
 import { RandomMealProps } from '../Homepage/Homepage';
 
 interface RandomMealFormProps {
     setNumberOfMeals: (numberOfMeals: number) => void;
-    numberOfMeals: number
-    randomMeals: RandomMealProps[]
+    numberOfMeals: number;
+    randomMeals: RandomMealProps[];
+    locked: boolean;
+    setLocked: (locked: boolean) => void;
 }
 
-const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMeals, randomMeals }) => {
+const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMeals, randomMeals, locked, setLocked }) => {
 
-    console.log('R', randomMeals)
+    console.log('R', randomMeals);
 
-    // const [open, setOpen] = useState<boolean>(false)
+    const handleOpen = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        console.log(parseInt(e.currentTarget.value));
+        setNumberOfMeals(numberOfMeals);
+    };
 
-    const handleOpen = (e: any) => {
-        console.log(parseInt(e.target.value))
-        setNumberOfMeals(numberOfMeals)
-        //setOpen(!open)
-    }
-
-    //create array called lockedRecipes to push in recipe id's of the locked recipes
-    //if locked recipes has.length, we will subtract lockedRecipes.length from randomRecipes.length
-
-    const handleNumberCapture = useCallback((e: any) => {
-        console.log('19', e.target.value)
-        setNumberOfMeals(parseInt(e.target.value))
-        // const selectedValue = parseInt(e.target.value)
-        // setNumberOfMeals(selectedValue);
-        //setOpen(false);
+    const handleNumberCapture = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+        console.log('19', e.target.value);
+        setNumberOfMeals(parseInt(e.target.value));
     }, [setNumberOfMeals]);
 
     return (
@@ -41,9 +34,9 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
                 <option value={5}>5</option>
                 <option value={7}>7</option>
             </select>
-            <RandomMeals randomMeals={randomMeals}/>
+            <RandomMeals randomMeals={randomMeals} locked={locked} setLocked={setLocked} />
         </div>
-    )
-}
+    );
+};
 
 export default RandomMealForm;
