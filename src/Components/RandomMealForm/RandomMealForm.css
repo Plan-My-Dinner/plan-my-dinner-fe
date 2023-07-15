@@ -1,26 +1,41 @@
 .drop-down {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* position: relative; */
+}
+
+.get-recipes-button {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    width: 10%;
+    margin: 10px;
+}
+
+.no-of-meals {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
 }
 
 .meal-numbers {
-    position: absolute;
-    list-style-type: none;
-    margin: 5px 0;
-    padding: 0;
-    border: 1px solid grey;
-    width: 150px;
+    display: flex;
+    justify-content: flex-end;
+    width: 10%;
+    margin: 10px;
 }
 
-.meal-numbers > li {
+/* .meal-numbers > li {
     margin: 0;
     background-color: white;
 }
 
 .meal-numbers > li:hover {
     background-color: lightgray;
-}
+} */
 
-.meal-numbers > li > button {
+/* .meal-numbers > li > button {
     width: 100%;
     height: 100%;
     text-align: left;
@@ -31,4 +46,4 @@
     margin: 0;
     font: inherit;
     cursor: pointer;
-}
+} */
