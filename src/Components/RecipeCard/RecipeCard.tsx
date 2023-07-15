@@ -2,7 +2,7 @@ import React from "react"
 import { RandomMealProps } from "../Homepage/Homepage"
 import './RecipeCard.css'
 
-const RecipeCard: React.FC<RandomMealProps> = ({ strMeal, idMeal, strMealThumb }) => {
+const RecipeCard: React.FC<RandomMealProps> = ({ strMeal, idMeal, strMealThumb, locked, setLocked }) => {
 
     return (
         <div className='recipe-container'>

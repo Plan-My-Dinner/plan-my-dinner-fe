@@ -14,10 +14,12 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
 
     console.log('R', randomMeals)
 
-    const [open, setOpen] = useState<boolean>(false)
+    // const [open, setOpen] = useState<boolean>(false)
 
-    const handleOpen = () => {
-        setOpen(!open)
+    const handleOpen = (e: any) => {
+        console.log(parseInt(e.target.value))
+        setNumberOfMeals(numberOfMeals)
+        //setOpen(!open)
     }
 
     //create array called lockedRecipes to push in recipe id's of the locked recipes
@@ -25,15 +27,17 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
 
     const handleNumberCapture = useCallback((e: any) => {
         console.log('19', e.target.value)
-        setNumberOfMeals(parseInt(e.target.value));
+        setNumberOfMeals(parseInt(e.target.value))
+        // const selectedValue = parseInt(e.target.value)
+        // setNumberOfMeals(selectedValue);
         //setOpen(false);
     }, [setNumberOfMeals]);
 
     return (
         <div className='drop-down'>
-            <button className='get-recipes-button' onClick={handleNumberCapture}>Get Recipes</button>
+            <button className='get-recipes-button' onClick={handleOpen}>Get Recipes</button>
             <p className='no-of-meals'>No. of meals</p>
-            <select className='meal-numbers'>
+            <select className='meal-numbers' onChange={handleNumberCapture} value={numberOfMeals}>
                 <option value={5}>5</option>
                 <option value={7}>7</option>
             </select>
