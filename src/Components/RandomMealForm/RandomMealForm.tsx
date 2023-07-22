@@ -17,7 +17,7 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
     console.log('R', randomMeals);
 
     const handleOpen = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        console.log(parseInt(e.currentTarget.value));
+        
         setNumberOfMeals(numberOfMeals);
     };
 
@@ -25,6 +25,12 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
         console.log('19', e.target.value);
         setNumberOfMeals(parseInt(e.target.value));
     }, [setNumberOfMeals]);
+
+    // localStorage for recipes that get locked incase user navigates away from homepage, locked recipes are still locked when they come back
+
+    // create array in homepage lockedRecipes, recipes that get locked will get pushed into this array
+    // ^^^ Can we use localStorage array instead of creating a new piece of state? I think so
+    // Instead of randomRecipes.length - lockedRecipes.length setNumberOfMeals --> randomRecipes.length - localStorage.length
 
     return (
         <div className='drop-down'>
