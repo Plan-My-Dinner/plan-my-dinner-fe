@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { fetchSingleRandomRecipe } from '../../apiCalls';
 import RandomMealForm from '../RandomMealForm/RandomMealForm';
-import { RandomMealProps } from '../../types';
+import { RandomMealProps, Meal } from '../../types';
 
 const Homepage: React.FC = () => {
   const [numberOfMeals, setNumberOfMeals] = useState<number>(5);
   const [randomMeals, setRandomMeals] = useState<RandomMealProps[]>([]);
-  const [locked, setLocked] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newMeals: RandomMealProps[] = [];
+        const newMeals: Meal[] = [];
         for (let i = 0; i < numberOfMeals; i++) {
           const data = await fetchSingleRandomRecipe();
           if (data?.meals) {
@@ -23,7 +22,13 @@ const Homepage: React.FC = () => {
           (meal, index, self) => index === self.findIndex((m) => m.idMeal === meal.idMeal)
         );
 
-        setRandomMeals(uniqueMeals);
+        const mealsWithLock: RandomMealProps[] = uniqueMeals.map((meal) => ({
+          ...meal,
+          locked: false,
+          toggleLock: () => toggleLock(meal.idMeal),
+        }));
+
+        setRandomMeals(mealsWithLock);
       } catch (error) {
         console.log(error);
       }
@@ -33,6 +38,14 @@ const Homepage: React.FC = () => {
     fetchData();
   }, [numberOfMeals]);
 
+  const toggleLock = (idMeal: string) => {
+    setRandomMeals((prevMeals) =>
+      prevMeals.map((meal) =>
+        meal.idMeal === idMeal ? { ...meal, locked: !meal.locked } : meal
+      )
+    );
+  };
+
   return (
     <div>
       HI!
@@ -40,8 +53,7 @@ const Homepage: React.FC = () => {
         numberOfMeals={numberOfMeals}
         setNumberOfMeals={setNumberOfMeals}
         randomMeals={randomMeals}
-        locked={locked}
-        setLocked={setLocked}
+        toggleLock={toggleLock}
       />
     </div>
   );

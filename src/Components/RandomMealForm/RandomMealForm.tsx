@@ -7,11 +7,10 @@ interface RandomMealFormProps {
   setNumberOfMeals: (numberOfMeals: number) => void;
   numberOfMeals: number;
   randomMeals: RandomMealProps[];
-  locked: boolean;
-  setLocked: (locked: boolean) => void;
+  toggleLock: (idMeal: string) => void;
 }
 
-const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMeals, randomMeals, locked, setLocked }) => {
+const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMeals, randomMeals, toggleLock }) => {
   const handleOpen = () => {
     setNumberOfMeals(numberOfMeals);
   };
@@ -33,7 +32,7 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
         <option value={5}>5</option>
         <option value={7}>7</option>
       </select>
-      <RandomMeals locked={locked} setLocked={setLocked} randomMeals={randomMeals} />
+      <RandomMeals randomMeals={randomMeals} toggleLock={toggleLock} />
     </div>
   );
 };

@@ -2,27 +2,23 @@ import React from 'react';
 import { RandomMealProps } from '../../types';
 import RecipeCard from '../RecipeCard/RecipeCard';
 
-type RandomMealComp = {
+interface RandomMealsProps {
   randomMeals: RandomMealProps[];
-  locked: boolean;
-  setLocked: (locked: boolean) => void;
-};
+  toggleLock: (idMeal: string) => void;
+}
 
-const RandomMeals: React.FC<RandomMealComp> = ({ randomMeals, locked, setLocked }) => {
-  const randomMealCards = randomMeals.map((randomMeal) => {
-    return (
-      <RecipeCard
-        strMeal={randomMeal.strMeal}
-        strMealThumb={randomMeal.strMealThumb}
-        idMeal={randomMeal.idMeal}
-        locked={locked}
-        setLocked={setLocked}
-        key={randomMeal.idMeal}
-      />
-    );
-  });
-
-  return <div className="random-meals">{randomMealCards}</div>;
+const RandomMeals: React.FC<RandomMealsProps> = ({ randomMeals, toggleLock }) => {
+  return (
+    <div className="random-meals">
+      {randomMeals.map((randomMeal) => (
+        <RecipeCard
+          key={randomMeal.idMeal}
+          {...randomMeal}
+          toggleLock={() => toggleLock(randomMeal.idMeal)} // Pass toggleLock as a prop to RecipeCard
+        />
+      ))}
+    </div>
+  );
 };
 
 export default RandomMeals;

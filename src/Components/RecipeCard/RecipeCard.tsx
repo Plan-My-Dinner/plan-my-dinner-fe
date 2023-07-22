@@ -1,24 +1,23 @@
 import React from 'react';
-import {RandomMealProps} from '../../types'
+import { RandomMealProps } from '../../types';
 import './RecipeCard.css';
 import lockedIcon from '../../Assets/lockedIcon.png';
 import unlockedIcon from '../../Assets/unlockedIcon.png';
 
 interface RecipeCardProps extends RandomMealProps {
-  locked: boolean;
-  setLocked: (locked: boolean) => void;
+  toggleLock: () => void;
 }
 
-const RecipeCard: React.FC<RecipeCardProps> = ({ strMeal, idMeal, strMealThumb, locked, setLocked }) => {
+const RecipeCard: React.FC<RecipeCardProps> = ({ strMeal, idMeal, strMealThumb, locked, toggleLock }) => {
   const handleLockClick = () => {
-    setLocked(!locked);
+    toggleLock();
   };
 
   return (
     <div className="recipe-container">
-      <div className="recipe-card" id={idMeal} key={idMeal}>
+      <div className="recipe-card" id={idMeal}>
         <button onClick={handleLockClick}>
-          {locked ? <img src={unlockedIcon} alt="unlocked" /> : <img src={lockedIcon} alt="locked" />}
+          {locked ? <img src={lockedIcon} alt="locked" /> : <img src={unlockedIcon} alt="unlocked" />}
         </button>
         <img className="recipe-image" src={strMealThumb} alt={strMeal} />
         <h3 className="recipe-name">{strMeal}</h3>
