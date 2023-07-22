@@ -1,49 +1,41 @@
-import React, { FC, useState, MouseEventHandler, useCallback } from 'react'
-import './RandomMealForm.css'
-import { log } from 'console';
+import React, { FC, useCallback } from 'react';
+import './RandomMealForm.css';
+import { RandomMealProps } from '../../types';
 import RandomMeals from '../RandomMeals/RandomMeals';
-import { RandomMealProps } from '../Homepage/Homepage';
 
 interface RandomMealFormProps {
-    setNumberOfMeals: (numberOfMeals: number) => void;
-    numberOfMeals: number
-    randomMeals: RandomMealProps[]
+  setNumberOfMeals: (numberOfMeals: number) => void;
+  numberOfMeals: number;
+  randomMeals: RandomMealProps[];
+  locked: boolean;
+  setLocked: (locked: boolean) => void;
 }
 
-const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMeals, randomMeals }) => {
+const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMeals, randomMeals, locked, setLocked }) => {
+  const handleOpen = () => {
+    setNumberOfMeals(numberOfMeals);
+  };
 
-    console.log('R', randomMeals)
+  const handleNumberCapture = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setNumberOfMeals(parseInt(e.target.value));
+    },
+    [setNumberOfMeals]
+  );
 
-    // const [open, setOpen] = useState<boolean>(false)
-
-    const handleOpen = (e: any) => {
-        console.log(parseInt(e.target.value))
-        setNumberOfMeals(numberOfMeals)
-        //setOpen(!open)
-    }
-
-    //create array called lockedRecipes to push in recipe id's of the locked recipes
-    //if locked recipes has.length, we will subtract lockedRecipes.length from randomRecipes.length
-
-    const handleNumberCapture = useCallback((e: any) => {
-        console.log('19', e.target.value)
-        setNumberOfMeals(parseInt(e.target.value))
-        // const selectedValue = parseInt(e.target.value)
-        // setNumberOfMeals(selectedValue);
-        //setOpen(false);
-    }, [setNumberOfMeals]);
-
-    return (
-        <div className='drop-down'>
-            <button className='get-recipes-button' onClick={handleOpen}>Get Recipes</button>
-            <p className='no-of-meals'>No. of meals</p>
-            <select className='meal-numbers' onChange={handleNumberCapture} value={numberOfMeals}>
-                <option value={5}>5</option>
-                <option value={7}>7</option>
-            </select>
-            <RandomMeals randomMeals={randomMeals}/>
-        </div>
-    )
-}
+  return (
+    <div className="drop-down">
+      <button className="get-recipes-button" onClick={handleOpen}>
+        Get Recipes
+      </button>
+      <p className="no-of-meals">No. of meals</p>
+      <select className="meal-numbers" onChange={handleNumberCapture} value={numberOfMeals}>
+        <option value={5}>5</option>
+        <option value={7}>7</option>
+      </select>
+      <RandomMeals locked={locked} setLocked={setLocked} randomMeals={randomMeals} />
+    </div>
+  );
+};
 
 export default RandomMealForm;
