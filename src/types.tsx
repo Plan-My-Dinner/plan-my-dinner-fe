@@ -5,7 +5,7 @@ export interface RandomMealProps {
   locked: boolean;
 }
 
-  export type Meal = {
+  export interface Meal {
     strMeal: string;
     idMeal: string;
     strMealThumb: string;
