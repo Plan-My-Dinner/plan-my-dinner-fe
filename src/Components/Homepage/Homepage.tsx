@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchSingleRandomRecipe } from '../../apiCalls';
 import RandomMealForm from '../RandomMealForm/RandomMealForm';
-import { RandomMealProps, Meal } from '../../types';
+import { RandomMealProps } from '../../types';
 
 const Homepage: React.FC = () => {
 
@@ -11,16 +11,26 @@ const Homepage: React.FC = () => {
   const [randomMeals, setRandomMeals] = useState<RandomMealProps[]>([]);
   const [lockedRecipes, setLockedRecipes] = useState<string[]>(initialLockedRecipes)
 
-  console.log('lockedRecipes', lockedRecipes)
-  
+  const toggleLock = (idMeal: string) => {
+    const flipLock = randomMeals.map((meal) => {
+        if(meal.idMeal === idMeal) {
+          meal.locked = !meal.locked
+        }
+        return meal
+      }
+    )
+    setRandomMeals(flipLock);
+  }
+
   useEffect(() => {
+    const keepLockedRecipes = randomMeals.filter(meal => meal.locked)
     const fetchData = async () => {
       try {
-        const newMeals: Meal[] = [];
         for (let i = 0; i < numberOfMeals; i++) {
           const data = await fetchSingleRandomRecipe();
           if (data?.meals) {
-            newMeals.push(...data.meals);
+            data.meals.locked = false
+            keepLockedRecipes.push(...data.meals);
           }
         }
         
@@ -43,23 +53,6 @@ const Homepage: React.FC = () => {
       setRandomMeals([]);
       fetchData();
     }, [numberOfMeals]);
-    
-    useEffect(() => {
-      randomMeals.forEach(recipe => localStorage.setItem('lockedRecipes', JSON.stringify(recipe.locked)))
-    }, [lockedRecipes, randomMeals])
-
-  const toggleLock = (idMeal: string) => {
-    setRandomMeals((prevMeals) =>
-      prevMeals.map((meal) =>
-        meal.idMeal === idMeal ? { ...meal, locked: !meal.locked } : meal
-      )
-    );
-    
-    // I'm trying to get the total number of locked meals. I want to iterate over the currMeals check if any of the currMeals have a locked property set to true and then set the value of numberOfMeals to that number/lockedRecipes.length
-    // const numberOfLockedMeals = randomMeals.reduce((total, meal) => (!meal.locked ? total + 1 : total), 0)
-    // setNumberOfMeals(numberOfLockedMeals)
-    // console.log(numberOfMeals)
-  };
 
   return (
     <div>

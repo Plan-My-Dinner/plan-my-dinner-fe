@@ -1,6 +1,7 @@
 import React from 'react';
 import { RandomMealProps } from '../../types';
 import RecipeCard from '../RecipeCard/RecipeCard';
+import './RandomMeals.css'
 
 interface RandomMealsProps {
   randomMeals: RandomMealProps[];
@@ -14,7 +15,7 @@ const RandomMeals: React.FC<RandomMealsProps> = ({ randomMeals, toggleLock }) =>
         <RecipeCard
           key={randomMeal.idMeal}
           {...randomMeal}
-          toggleLock={() => toggleLock(randomMeal.idMeal)} // Pass toggleLock as a prop to RecipeCard
+          toggleLock={() => toggleLock(randomMeal.idMeal)}
         />
       ))}
     </div>
