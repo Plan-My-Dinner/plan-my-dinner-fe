@@ -1,5 +1,18 @@
 .random-meals {
     display: flex;
     flex-direction: row;
+    max-width: 100%;
+    /* flex-wrap: wrap; */
     padding-top: 100px;
+}
+
+@media screen and (max-width: 450px) {
+    .random-meals {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+    }
 }

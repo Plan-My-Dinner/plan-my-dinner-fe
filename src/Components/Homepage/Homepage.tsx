@@ -34,7 +34,7 @@ const Homepage: React.FC = () => {
           }
         }
         
-        const uniqueMeals = newMeals.filter(
+        const uniqueMeals = keepLockedRecipes.filter(
           (meal, index, self) => index === self.findIndex((m) => m.idMeal === meal.idMeal)
           );
           
