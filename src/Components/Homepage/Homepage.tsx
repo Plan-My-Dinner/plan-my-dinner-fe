@@ -58,7 +58,7 @@ const Homepage: React.FC = () => {
   return (
     <div className='homepage'>
       <WelcomeBox 
-        strMealThumb={strMealThumb}
+        // strMealThumb={strMealThumb}
       />
       <RandomMealForm
         numberOfMeals={numberOfMeals}
