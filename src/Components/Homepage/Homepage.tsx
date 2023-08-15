@@ -40,8 +40,6 @@ const Homepage: React.FC = () => {
           console.log(error);
         }
       };
-      
-      setRandomMeals([]);
       fetchData();
     }, [numberOfMeals]);
 
