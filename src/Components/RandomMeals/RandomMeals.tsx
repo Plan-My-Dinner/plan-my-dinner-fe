@@ -2,6 +2,7 @@ import React from 'react';
 import { RandomMealProps } from '../../types';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import './RandomMeals.css'
+import WelcomeBox from '../WelcomeBox/WelcomeBox';
 
 interface RandomMealsProps {
   randomMeals: RandomMealProps[];
