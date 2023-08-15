@@ -5,11 +5,8 @@ import { RandomMealProps } from '../../types';
 
 const Homepage: React.FC = () => {
 
-  const storedLockedRecipes: string | null = localStorage.getItem('lockedRecipes')
-  const initialLockedRecipes: string[] = storedLockedRecipes ? JSON.parse(storedLockedRecipes) : [];
   const [numberOfMeals, setNumberOfMeals] = useState<number>(5);
   const [randomMeals, setRandomMeals] = useState<RandomMealProps[]>([]);
-  const [lockedRecipes, setLockedRecipes] = useState<string[]>(initialLockedRecipes)
 
   const toggleLock = (idMeal: string) => {
     const flipLock = randomMeals.map((meal) => {
@@ -34,17 +31,11 @@ const Homepage: React.FC = () => {
           }
         }
         
-        const uniqueMeals = newMeals.filter(
+        const uniqueMeals = keepLockedRecipes.filter(
           (meal, index, self) => index === self.findIndex((m) => m.idMeal === meal.idMeal)
           );
           
-          const mealsWithLock: RandomMealProps[] = uniqueMeals.map((meal) => ({
-            ...meal,
-            locked: false,
-            toggleLock: () => toggleLock(meal.idMeal),
-          }));
-          
-          setRandomMeals(mealsWithLock);
+          setRandomMeals(uniqueMeals);
         } catch (error) {
           console.log(error);
         }
