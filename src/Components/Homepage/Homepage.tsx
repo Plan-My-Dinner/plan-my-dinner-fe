@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchSingleRandomRecipe } from '../../apiCalls';
+import WelcomeBox from '../WelcomeBox/WelcomeBox';
 import RandomMealForm from '../RandomMealForm/RandomMealForm';
 import { RandomMealProps } from '../../types';
 
@@ -44,8 +45,14 @@ const Homepage: React.FC = () => {
     }, [numberOfMeals]);
 
   return (
-    <div>
-      HI!
+    <div className='homepage'>
+      {randomMeals.length > 0 && (
+        <WelcomeBox
+          strMealThumb={randomMeals[0].strMealThumb}
+          strMeal={randomMeals[0].strMeal}
+          idMeal={randomMeals[0].idMeal}
+        />
+      )}
       <RandomMealForm
         numberOfMeals={numberOfMeals}
         setNumberOfMeals={setNumberOfMeals}
