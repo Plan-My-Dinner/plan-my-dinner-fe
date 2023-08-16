@@ -1,12 +1,12 @@
 import React from 'react';
-import { RandomMealProps } from '../../types';
+import { Meal } from '../../types';
 import './WelcomeBox.css';
 
-interface WelcomeBoxProps extends RandomMealProps {
-    toggleLock: (idMeal: string) => void;
-  }
+// interface WelcomeBoxProps extends Meal {
+//     toggleLock: (idMeal: string) => void;
+//   }
 
-const WelcomeBox: React.FC<WelcomeBoxProps> = ({ strMealThumb, strMeal }) => {
+const WelcomeBox: React.FC<Meal> = ({ strMealThumb, strMeal }) => {
 
     return (
         <div className="welcome-box">

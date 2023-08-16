@@ -41,16 +41,18 @@ const Homepage: React.FC = () => {
           console.log(error);
         }
       };
-      
-      setRandomMeals([]);
       fetchData();
     }, [numberOfMeals]);
 
   return (
     <div className='homepage'>
-      <WelcomeBox 
-        // strMealThumb={strMealThumb}
-      />
+      {randomMeals.length > 0 && (
+        <WelcomeBox
+          strMealThumb={randomMeals[0].strMealThumb}
+          strMeal={randomMeals[0].strMeal}
+          idMeal={randomMeals[0].idMeal}
+        />
+      )}
       <RandomMealForm
         numberOfMeals={numberOfMeals}
         setNumberOfMeals={setNumberOfMeals}
