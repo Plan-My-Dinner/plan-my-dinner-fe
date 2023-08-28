@@ -19,7 +19,7 @@
 .welcome-image-container {
     background-color: lightgrey;
     padding: 2rem;
-    width: 30%;
+    width: 40%;
     /* display: flex; */
 }
 
@@ -30,14 +30,26 @@
 
 .welcome-text-container {
     /* display:flex; */
-    background-color: lightgrey;
+    background-color: rgb(128, 197, 149);
     padding: 2rem;
-    width: 70%;
+    width: 60%;
     /* flex-direction: column; */
 }
 
 .full-width {
     flex-basis: 100%;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.sub-text {
+    font-size: small;
+}
+
+button {
+    margin: 30px;
 }
 
 /* .welcome-buttons {
