@@ -1,0 +1,14 @@
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(128, 197, 149);
+    padding-top: 25px;
+}
+
+.name-container {
+    display: flex;
+}
+
+.links-container {
+    display: flex;
+}

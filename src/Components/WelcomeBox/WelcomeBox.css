@@ -1,9 +1,10 @@
 .welcome-box {
     max-width: 1200px;
+    /* height: 400px; */
     margin: 0 auto;
     display: flex;
     align-items: center;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     gap: 5px;
     /* display: flex; */
     /* flex-direction: row; */
@@ -17,7 +18,7 @@
 } */
 
 .welcome-image-container {
-    background-color: lightgrey;
+    /* background-color: lightgrey; */
     padding: 2rem;
     width: 40%;
     /* display: flex; */

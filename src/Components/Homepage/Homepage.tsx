@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchSingleRandomRecipe } from '../../apiCalls';
+import Header from '../Header/Header';
 import WelcomeBox from '../WelcomeBox/WelcomeBox';
+import Footer from '../Footer/Footer';
 import RandomMealForm from '../RandomMealForm/RandomMealForm';
 import { RandomMealProps } from '../../types';
 
@@ -46,6 +48,7 @@ const Homepage: React.FC = () => {
 
   return (
     <div className='homepage'>
+      <Header />
       {randomMeals.length > 0 && (
         <WelcomeBox
           strMealThumb={randomMeals[0].strMealThumb}
@@ -60,6 +63,7 @@ const Homepage: React.FC = () => {
         randomMeals={randomMeals}
         toggleLock={toggleLock}
       />
+      <Footer />
     </div>
   );
 };
