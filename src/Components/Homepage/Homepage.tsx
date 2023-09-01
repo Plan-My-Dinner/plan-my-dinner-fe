@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import WelcomeBox from '../WelcomeBox/WelcomeBox';
 import Footer from '../Footer/Footer';
 import RandomMealForm from '../RandomMealForm/RandomMealForm';
+// import HomepageCalendar
 import { RandomMealProps } from '../../types';
 
 const Homepage: React.FC = () => {
@@ -51,9 +52,8 @@ const Homepage: React.FC = () => {
       <Header />
       {randomMeals.length > 0 && (
         <WelcomeBox
-          strMealThumb={randomMeals[0].strMealThumb}
-          strMeal={randomMeals[0].strMeal}
-          idMeal={randomMeals[0].idMeal}
+          randomMeals={randomMeals}
+          toggleLock={toggleLock}
         />
       )}
       <RandomMealForm

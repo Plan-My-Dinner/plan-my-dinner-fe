@@ -1,17 +1,24 @@
 import React from 'react';
-import { Meal } from '../../types';
+import { RandomMealsProps, Meal } from '../../types';
 import './WelcomeBox.css';
 
 // interface WelcomeBoxProps extends Meal {
 //     toggleLock: (idMeal: string) => void;
 //   }
 
-const WelcomeBox: React.FC<Meal> = ({ strMealThumb, strMeal }) => {
+const WelcomeBox: React.FC<RandomMealsProps> = ({ randomMeals }) => {
+    console.log('random', randomMeals)
+
+    const getRandomMeal = (randomMeals:RandomMealsProps) => {
+        console.log(randomMeals)
+        return Math.floor(Math.random() * randomMeals.length)
+    }
+    console.log(getRandomMeal)
 
     return (
         <div className="welcome-box">
             <div className='welcome-image-container'>
-                <img className='welcome-image' src={strMealThumb} alt={strMeal} />
+                <img className='welcome-image' src={getRandomMeal(randomMeals)} alt={randomMeals} />
             </div>
             <div className='welcome-text-container full-width'>
                 <h1>Start Planning Your Week!</h1>

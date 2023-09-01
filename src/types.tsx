@@ -7,3 +7,8 @@ export interface RandomMealProps extends Meal {
     idMeal: string;
     strMealThumb: string;
   };
+
+  export interface RandomMealsProps {
+    randomMeals: RandomMealProps[];
+    toggleLock: (idMeal: string) => void;
+  }
