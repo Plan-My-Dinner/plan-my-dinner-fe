@@ -30,13 +30,15 @@ const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMea
         <button className="get-recipes-button" onClick={handleOpen}>
           Get Recipes
         </button>
-      <p className="no-of-meals">How many meals would you like to plan?</p>
+        <p className="no-of-meals">How many meals would you like to plan?</p>
       <select className="meal-numbers" onChange={handleNumberCapture} value={numberOfMeals}>
         <option value={5}>5</option>
         <option value={7}>7</option>
       </select>
       </div>
-      <RandomMeals randomMeals={randomMeals} toggleLock={toggleLock} />
+      <div className='random-meals-section'>
+        <RandomMeals randomMeals={randomMeals} toggleLock={toggleLock} />
+      </div>
     </div>
   );
 };

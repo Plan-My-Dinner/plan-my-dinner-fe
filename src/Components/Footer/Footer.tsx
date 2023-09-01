@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer.css";
-// import githubLogo from "../../Images/GitHub-Logo.svg";
-// import linkedinLogo from "../../Images/LinkedIn-Logo.svg";
+import githubLogo from "../../Assets/GitHub-Logo.svg";
+import linkedinLogo from "../../Assets/LinkedIn-Logo.svg";
 
 const Footer = () => {
 
@@ -13,7 +13,7 @@ const Footer = () => {
           <a href="https://www.linkedin.com/in/danielle-sweeny-75b50b84/">
             <img
               className="link-logo"
-              //src={linkedinLogo}
+              src={linkedinLogo}
               alt="LinkedIn logo"
               height="50vh"
             />
@@ -21,7 +21,7 @@ const Footer = () => {
           <a href="https://github.com/dsweeny1">
             <img
               className="link-logo"
-             // src={githubLogo}
+                src={githubLogo}
               alt="GitHub logo"
               height="50vh"
             />
@@ -32,7 +32,7 @@ const Footer = () => {
           <a href="https://www.linkedin.com/in/danielle-sweeny-75b50b84/">
             <img
               className="link-logo"
-              //src={linkedinLogo}
+              src={linkedinLogo}
               alt="LinkedIn logo"
               height="50vh"
             />
@@ -40,7 +40,7 @@ const Footer = () => {
           <a href="https://github.com/dsweeny1">
             <img
               className="link-logo"
-             // src={githubLogo}
+                src={githubLogo}
               alt="GitHub logo"
               height="50vh"
             />

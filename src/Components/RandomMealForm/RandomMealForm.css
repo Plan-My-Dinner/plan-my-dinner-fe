@@ -9,6 +9,7 @@
 .input-section {
     display: flex;
     align-items: flex-end;
+    justify-content: space-evenly;
     margin: 10px;
 
 }
@@ -35,6 +36,12 @@
     /* justify-content: flex-end;
     width: 10%; */
     margin: 10px;
+}
+
+.random-meals-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* .meal-numbers > li {
