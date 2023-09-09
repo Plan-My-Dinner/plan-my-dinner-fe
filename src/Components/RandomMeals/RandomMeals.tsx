@@ -2,7 +2,6 @@ import React from 'react';
 import { RandomMealsProps } from '../../types';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import './RandomMeals.css'
-import WelcomeBox from '../WelcomeBox/WelcomeBox';
 
 const RandomMeals: React.FC<RandomMealsProps> = ({ randomMeals, toggleLock }) => {
   return (
