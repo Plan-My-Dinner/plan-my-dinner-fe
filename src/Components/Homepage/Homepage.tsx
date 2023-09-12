@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import { fetchSingleRandomRecipe } from '../../apiCalls';
 import Header from '../Header/Header';
 import WelcomeBox from '../WelcomeBox/WelcomeBox';
 import Footer from '../Footer/Footer';
 import RandomMealForm from '../RandomMealForm/RandomMealForm';
-// import HomepageCalendar
+import HomepageCalendar from '../HomepageCalender/HomepageCalender';
 import { RandomMealProps } from '../../types';
 
 const Homepage: React.FC = () => {
@@ -63,6 +63,9 @@ const Homepage: React.FC = () => {
         randomMeals={randomMeals}
         toggleLock={toggleLock}
       />
+      <HomepageCalendar 
+      randomMeals={randomMeals} 
+      toggleLock={toggleLock} />
       <Footer />
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { RandomMealsProps } from '../../types';
-import './WelcomeBox.css';
+import './WelcomeBox.css'
 
 // interface WelcomeBoxProps extends Meal {
 //     toggleLock: (idMeal: string) => void;
