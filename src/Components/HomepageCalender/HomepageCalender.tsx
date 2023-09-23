@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './HomepageCalendar.css'
+import './HomepageCalender.css'
 import { RandomMealProps, Meal } from '../../types';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import { useDrop } from 'react-dnd';
@@ -12,13 +12,34 @@ interface HomepageCalendarProps {
 const HomepageCalendar: React.FC<HomepageCalendarProps> = ({ randomMeals, toggleLock }) => {
   const [dropCalendar, setDropCalendar] = useState<Meal[]>([]);
 
-  const [, drop] = useDrop(() => ({
-    accept: 'recipe-card',
-    drop: (item: { idMeal: string }) => addRecipeCardToBoard(item.idMeal),
+  // const [{ isOver }, drop] = useDrop(() => ({
+  //   // console.log(isOver)
+  //   accept: 'recipe-card',
+  //   drop: (meal: { idMeal: string }) => addRecipeCardToBoard(meal.idMeal),
+  //   collect: (monitor) => ({
+  //     isOver: !!monitor.isOver(),
+  //   }),
+  // }));
+
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: "recipe-card",
+    drop: (meal: Meal) => addRecipeCardToBoard(meal.idMeal),
+    // console.log(item)
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver()
+    }),
   }));
 
   const addRecipeCardToBoard = (id: string) => {
-    const filteredRandomMeals = randomMeals.filter((meal) => id === meal.idMeal);
+    const filteredRandomMeals = randomMeals.filter((meal) => meal.idMeal === id);
+  
+    if (filteredRandomMeals.length === 0) {
+      console.error(`Meal with id ${id} not found in randomMeals`);
+      console.log('randomMeals:', randomMeals);
+      return;
+    }
+  
+    console.log(`Added meal with id ${id} to the dropCalendar`);
     setDropCalendar((dropCalendar) => [...dropCalendar, filteredRandomMeals[0]]);
   };
 

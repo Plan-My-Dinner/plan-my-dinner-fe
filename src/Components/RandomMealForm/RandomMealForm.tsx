@@ -1,8 +1,10 @@
 
 import React, { FC } from 'react';
 import './RandomMealForm.css';
+// import { useDrop } from 'react-dnd';
 import { RandomMealProps } from '../../types';
 import RandomMeals from '../RandomMeals/RandomMeals';
+// import RecipeCard from '../RecipeCard/RecipeCard'
 
 interface RandomMealFormProps {
   setNumberOfMeals: (numberOfMeals: number) => void;
@@ -13,6 +15,7 @@ interface RandomMealFormProps {
 }
 
 const RandomMealForm: FC<RandomMealFormProps> = ({ numberOfMeals, setNumberOfMeals, setRandomMeals, randomMeals, toggleLock }) => {
+
   const handleOpen = () => {
     setNumberOfMeals(numberOfMeals);
     const numberOfLockedMeals = randomMeals.reduce((total, meal) => (meal.locked ? total + 1 : total), 0)
