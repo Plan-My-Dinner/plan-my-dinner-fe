@@ -44,6 +44,7 @@ const Homepage: React.FC = () => {
         );
 
         setRandomMeals(uniqueMeals);
+        // console.log('homepage', randomMeals)
       } catch (error) {
         console.error(error);
         // Handle errors here if needed
@@ -52,6 +53,10 @@ const Homepage: React.FC = () => {
 
     fetchData();
   }, [numberOfMeals]);
+
+  useEffect(() => {
+    console.log('homepage', randomMeals);
+  }, [randomMeals]);
 
   return (
     <div className='homepage'>

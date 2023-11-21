@@ -14,56 +14,48 @@ interface DroppedMeal {
 }
 
 const HomepageCalender: React.FC<HomepageCalenderProps> = ({ randomMeals, toggleLock }) => {
-  console.log('1', randomMeals)
+  // console.log('randomMeals', randomMeals)
   const [dropCalendar, setDropCalendar] = useState<Meal[]>([]);
 
-  console.log('drop array1', dropCalendar)
+  // console.log('drop array1', dropCalendar)
 
+  
+  
+  // console.log('before', randomMeals)
   const [{ isOver }, drop] = useDrop(() => ({
-  accept: 'recipe-card',
-  drop: (droppedMeal: DroppedMeal) => {
-    console.log('meal', droppedMeal);
-    addRecipeCardToBoard(droppedMeal.id);
-  },
-  collect: (monitor) => ({
-    isOver: !!monitor.isOver(),
-  }),
-}));
-
-
-  console.log('before', randomMeals)
-
-  // const addRecipeCardToBoard = (id: string) => {
-  //   console.log('add', randomMeals)
-  //   const filteredRandomMeals = randomMeals.filter((meal) => meal.idMeal === id);
-
-  //   if (filteredRandomMeals.length === 0) {
-  //     console.error(`Meal with id ${id} not found in randomMeals`);
-  //     console.log('randomMeals:', randomMeals);
-  //     return;
-  //   }
-
-  //   console.log(`Added meal with id ${id} to the dropCalendar`);
-  //   setDropCalendar((dropCalendar) => [...dropCalendar, filteredRandomMeals[0]]);
-  // };
-
+    accept: 'recipe-card',
+    drop: (droppedMeal: DroppedMeal) => {
+      console.log('meal', droppedMeal);
+      addRecipeCardToBoard(droppedMeal.id);
+      // console.log('hook', randomMeals)
+    },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }), [randomMeals]);
+  
+  // working function
+  console.log('before funtion', randomMeals)
   const addRecipeCardToBoard = (id: string) => {
+    console.log('in function', randomMeals)
+
     const filteredRandomMeals = randomMeals.filter((meal) => meal.idMeal === id);
-  
-    if (filteredRandomMeals.length === 0) {
-      console.error(`Meal with id ${id} not found in randomMeals`);
-      return;
-    }
-  
-    console.log(`Added meal with id ${id} to the dropCalendar`);
-  
-    if (!dropCalendar.some((meal) => meal.idMeal === id)) {
-      setDropCalendar((dropCalendar) => [...dropCalendar, filteredRandomMeals[0]]);
-    }
+    console.log('filtered', filteredRandomMeals)
+
+    const uniqueDroppedMeals = filteredRandomMeals.filter(
+      (meal, index, self) =>
+      index === self.findIndex((m) => m.idMeal === meal.idMeal)
+      );
+    
+      setDropCalendar((prevDropCalendar) => [...prevDropCalendar, ...uniqueDroppedMeals]);
+      console.log('drop', dropCalendar)
+          // this issue seems like an async issue from the original fetch call
+          // wonky stuff going on here. I have to trigger a refresh exactly right, even if it's just commenting in or out a console log, inside OR outside of this function, to get this conditional to work.
+          // still have to work out the conditional more bc right now it only works with the object in the first position, you can still add duplicates if the object you're adding is not at uniqueDroppedMeals[0]
+            // would a find work here? Or could I do a map over uniqueDroppedMeals within the .includes()?
+          // }
   };
-  
-  console.log('after', randomMeals)
-  console.log('drop array2', dropCalendar)
+  console.log('after function', randomMeals)
 
   return (
     <div className='homepage-calendar-container'>
