@@ -1,60 +1,68 @@
-import React, { useEffect, useState, ReactNode } from 'react';
-import { fetchSingleRandomRecipe } from '../../apiCalls';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import WelcomeBox from '../WelcomeBox/WelcomeBox';
 import Footer from '../Footer/Footer';
 import RandomMealForm from '../RandomMealForm/RandomMealForm';
-import HomepageCalendar from '../HomepageCalender/HomepageCalender';
+import HomepageCalender from '../HomepageCalender/HomepageCalender';
+import { fetchSingleRandomRecipe } from '../../apiCalls';
 import { RandomMealProps } from '../../types';
 
 const Homepage: React.FC = () => {
-
   const [numberOfMeals, setNumberOfMeals] = useState<number>(5);
   const [randomMeals, setRandomMeals] = useState<RandomMealProps[]>([]);
 
   const toggleLock = (idMeal: string) => {
-    const flipLock = randomMeals.map((meal) => {
-        if(meal.idMeal === idMeal) {
-          meal.locked = !meal.locked
-        }
-        return meal
+    const updatedRandomMeals = randomMeals.map((meal) => {
+      if (meal.idMeal === idMeal) {
+        return { ...meal, locked: !meal.locked }; // Create a new object
       }
-    )
-    setRandomMeals(flipLock);
-  }
+      return meal;
+    });
+
+    setRandomMeals(updatedRandomMeals);
+  };
 
   useEffect(() => {
-    const keepLockedRecipes = randomMeals.filter(meal => meal.locked)
     const fetchData = async () => {
       try {
+        const fetchedMeals = [];
         for (let i = 0; i < numberOfMeals; i++) {
           const data = await fetchSingleRandomRecipe();
           if (data?.meals) {
-            data.meals.locked = false
-            keepLockedRecipes.push(...data.meals);
+            const newMeals = data.meals.map((meal: RandomMealProps) => ({  // Specify the type for meal
+              ...meal,
+              locked: false,
+            }));
+            fetchedMeals.push(...newMeals);
           }
         }
-        
-        const uniqueMeals = keepLockedRecipes.filter(
-          (meal, index, self) => index === self.findIndex((m) => m.idMeal === meal.idMeal)
-          );
-          
-          setRandomMeals(uniqueMeals);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, [numberOfMeals]);
+
+        // Deduplicate meals by idMeal
+        const uniqueMeals = fetchedMeals.filter(
+          (meal, index, self) =>
+            index === self.findIndex((m) => m.idMeal === meal.idMeal)
+        );
+
+        setRandomMeals(uniqueMeals);
+        // console.log('homepage', randomMeals)
+      } catch (error) {
+        console.error(error);
+        // Handle errors here if needed
+      }
+    };
+
+    fetchData();
+  }, [numberOfMeals]);
+
+  useEffect(() => {
+    console.log('homepage', randomMeals);
+  }, [randomMeals]);
 
   return (
     <div className='homepage'>
       <Header />
       {randomMeals.length > 0 && (
-        <WelcomeBox
-          randomMeals={randomMeals}
-          toggleLock={toggleLock}
-        />
+        <WelcomeBox randomMeals={randomMeals} toggleLock={toggleLock} />
       )}
       <RandomMealForm
         numberOfMeals={numberOfMeals}
@@ -63,9 +71,7 @@ const Homepage: React.FC = () => {
         randomMeals={randomMeals}
         toggleLock={toggleLock}
       />
-      <HomepageCalendar 
-      randomMeals={randomMeals} 
-      toggleLock={toggleLock} />
+      <HomepageCalender randomMeals={randomMeals} toggleLock={toggleLock} />
       <Footer />
     </div>
   );

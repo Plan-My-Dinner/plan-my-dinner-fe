@@ -22,7 +22,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ strMeal, idMeal, strMealThumb, 
   // };
 
   const [{isDragging}, drag] = useDrag(() => ({
-    type: 'section',
+    type: 'recipe-card',
     item: {id: idMeal},
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
